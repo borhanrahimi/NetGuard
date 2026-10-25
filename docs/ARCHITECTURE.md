@@ -34,7 +34,7 @@ flowchart LR
 | `storage` | Persist devices, scans, and baselines in SQLite | Planned |
 | `detector` | Compare the latest scan against the baseline and emit changes | Planned |
 | `risk` | Rules that rate open services by risk | Planned |
-| `cli` | Command-line interface | Planned |
+| `cli` | Command-line interface (`netguard` command) | Prototype |
 | `api` + dashboard | FastAPI backend and React frontend | Planned |
 
 ### Design rule: scanning returns data, it does not print

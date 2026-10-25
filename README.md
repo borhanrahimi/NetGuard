@@ -10,7 +10,7 @@ NetGuard's goal is to answer three questions: **What is on my network? What chan
 
 - Detect computer hostname
 - Identify local IP address
-- Check common local TCP ports
+- Scan TCP ports and classify them as open, closed, or filtered
 - Display scan results in the terminal
 
 ## Planned Features
@@ -21,10 +21,53 @@ NetGuard's goal is to answer three questions: **What is on my network? What chan
 - Scan history and continuous monitoring
 - Web dashboard (FastAPI + React)
 
-## Run the Project
+## Getting Started
+
+Requires Python 3.10+.
 
 ```bash
-python3 main.py
+git clone https://github.com/borhanrahimi/NetGuard.git
+cd NetGuard
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e ".[dev]"
+```
+
+## Usage
+
+```bash
+netguard
+```
+
+Example output:
+
+```
+Welcome to NetGuard!
+
+=== NETWORK INFORMATION ===
+Computer name: my-laptop.lan
+Local IP address: 192.168.1.43
+
+=== LOCAL PORT SCANNER ===
+Port 22: CLOSED
+Port 80: CLOSED
+Port 5000: OPEN
+...
+
+NetGuard scan completed!
+```
+
+## Project Structure
+
+```
+netguard/
+├── pyproject.toml          # package metadata and dependencies
+├── src/netguard/
+│   ├── cli.py              # command-line entry point
+│   ├── host_info.py        # hostname and local IP detection
+│   └── port_scanner.py     # TCP port scanning
+├── tests/                  # unit tests
+└── docs/                   # roadmap, architecture, case study
 ```
 
 ## Documentation

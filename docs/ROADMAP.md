@@ -9,14 +9,15 @@ NetGuard is built in phases. Each phase ends with something usable, tested, and 
 - [x] Detect hostname and local IP address
 - [x] Check a fixed list of TCP ports on localhost
 
-## Phase 1 — Solid foundation ⏳
+## Phase 1 — Solid foundation 🚧
 
 Goal: turn the prototype into a well-structured, testable Python package.
 
-- [ ] Package layout (`src/netguard/`) with `pyproject.toml`
+- [x] Package layout (`src/netguard/`) with `pyproject.toml` and a `netguard` command
+- [x] Scanners return structured data (dataclasses); only the CLI prints
 - [ ] CLI with subcommands (`netguard info`, `netguard scan`)
 - [ ] Configurable target host and port ranges (`--host`, `--ports 1-1024`)
-- [ ] Report three port states: **open**, **closed**, **filtered**
+- [x] Report three port states: **open**, **closed**, **filtered**
 - [ ] Concurrent scanning with a thread pool
 - [ ] Service name lookup (22 → ssh, 443 → https)
 - [ ] Unit tests with `pytest`, linting with `ruff`
