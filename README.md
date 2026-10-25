@@ -1,7 +1,10 @@
-
 # NetGuard
 
-A personal network monitoring and security project built with Python.
+A lightweight network monitoring and security tool for home and small-office networks, built with Python.
+
+NetGuard's goal is to answer three questions: **What is on my network? What changed? Is anything exposed that shouldn't be?**
+
+> **Status:** early development. See the [roadmap](docs/ROADMAP.md).
 
 ## Current Features
 
@@ -10,10 +13,13 @@ A personal network monitoring and security project built with Python.
 - Check common local TCP ports
 - Display scan results in the terminal
 
-## Technologies
+## Planned Features
 
-- Python 3
-- Python socket library
+- Discover devices on the local network
+- Baseline the network and detect changes (new devices, newly opened ports)
+- Flag risky exposed services
+- Scan history and continuous monitoring
+- Web dashboard (FastAPI + React)
 
 ## Run the Project
 
@@ -21,10 +27,12 @@ A personal network monitoring and security project built with Python.
 python3 main.py
 ```
 
-## Future Features
+## Documentation
 
-- Discover devices on a local network
-- Save network scan history
-- Monitor device availability
-- Detect network changes
-- Build a React dashboard
+- [Roadmap](docs/ROADMAP.md): phases and progress
+- [Architecture](docs/ARCHITECTURE.md): design, components, and key decisions
+- [Case Study](docs/CASE_STUDY.md): the problem, approach, and lessons learned
+
+## Responsible Use
+
+NetGuard is intended **only for networks you own or have explicit permission to test**. Unauthorized scanning may be illegal in your jurisdiction.
