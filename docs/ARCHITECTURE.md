@@ -28,13 +28,13 @@ flowchart LR
 
 | Module | Responsibility | Status |
 |---|---|---|
-| `host_info` | Hostname and local IP detection | Prototype |
-| `port_scanner` | TCP connect scan; reports open / closed / filtered | Prototype |
+| `host_info` | Hostname and local IP detection | Done |
+| `port_scanner` | Concurrent TCP connect scan; reports open / closed / filtered and service names | Done |
 | `discovery` | Find devices on the LAN via ARP / ping sweep | Planned |
 | `storage` | Persist devices, scans, and baselines in SQLite | Planned |
 | `detector` | Compare the latest scan against the baseline and emit changes | Planned |
 | `risk` | Rules that rate open services by risk | Planned |
-| `cli` | Command-line interface (`netguard` command) | Prototype |
+| `cli` | `netguard info` and `netguard scan` subcommands (argparse) | Done |
 | `api` + dashboard | FastAPI backend and React frontend | Planned |
 
 ### Design rule: scanning returns data, it does not print
@@ -87,6 +87,8 @@ Devices are identified by **MAC address** rather than IP, because IPs change wit
 | Port scan method | TCP connect scan | Works without root privileges; reliable |
 | Storage | SQLite | Zero setup, single file, sufficient for one network |
 | Concurrency | Thread pool | Network I/O–bound workload; simple and effective |
+| CLI parsing | `argparse` | Standard library, no extra dependency; subcommands built in |
+| Service names | Built-in table, then the OS services database | Same answer on every OS for common ports, still covers the rest |
 | API | FastAPI | Typed, auto-generated docs, async-ready |
 
 Larger decisions can be recorded as ADRs in `docs/adr/` as the project grows.

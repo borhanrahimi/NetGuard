@@ -8,10 +8,11 @@ NetGuard's goal is to answer three questions: **What is on my network? What chan
 
 ## Current Features
 
-- Detect computer hostname
-- Identify local IP address
-- Scan TCP ports and classify them as open, closed, or filtered
-- Display scan results in the terminal
+- Show the computer's hostname and local IP address
+- Scan any TCP ports or port ranges on a host (`--ports 1-1024`)
+- Classify ports as open, closed, or filtered
+- Fast concurrent scanning with a thread pool
+- Service name lookup (22 → ssh, 443 → https)
 
 ## Planned Features
 
@@ -36,25 +37,45 @@ pip install -e ".[dev]"
 ## Usage
 
 ```bash
-netguard
+netguard info                              # hostname and local IP
+netguard scan                              # a few common ports on localhost
+netguard scan --host 192.168.1.1 -p 1-1024 # a port range on another host
+netguard scan -p 22,80,443 --all           # also list closed / filtered ports
+netguard scan --help                       # all options
 ```
 
 Example output:
 
 ```
-Welcome to NetGuard!
-
+$ netguard info
 === NETWORK INFORMATION ===
 Computer name: my-laptop.lan
 Local IP address: 192.168.1.43
 
-=== LOCAL PORT SCANNER ===
-Port 22: CLOSED
-Port 80: CLOSED
-Port 5000: OPEN
-...
+$ netguard scan -p 1-1024
+Scanning 127.0.0.1: 1024 ports
 
-NetGuard scan completed!
+PORT    STATE     SERVICE
+22      open      ssh
+80      open      http
+
+Scanned 1024 ports in 0.38s: 2 open, 1022 closed, 0 filtered
+```
+
+| Option | Default | Description |
+|---|---|---|
+| `--host` | `127.0.0.1` | Host name or IP address to scan |
+| `-p`, `--ports` | a few common ports | Ports to scan, e.g. `22,80,443` or `1-1024` |
+| `--timeout` | `0.5` | Seconds to wait for each port |
+| `--workers` | `100` | Number of ports checked at the same time |
+| `-a`, `--all` | off | Also list closed and filtered ports |
+
+## Development
+
+```bash
+pytest          # run the tests
+ruff check .    # lint
+ruff format .   # format
 ```
 
 ## Project Structure
